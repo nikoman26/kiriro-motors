@@ -29,6 +29,7 @@ Local development still works without Supabase credentials because `src/utils/st
 | `POST` | `/api/applications` | Create a loan or vehicle finance application and tracking number. |
 | `GET` | `/api/applications/track/:trackingNumber` | Return limited customer-facing application status. |
 | `POST` | `/api/applications/:id/documents` | Create a private document record and signed upload URL. |
+| `POST` | `/api/applications/:id/documents/:documentId/complete` | Mark a signed document upload complete after the browser upload succeeds. |
 
 ## Admin API Endpoints
 
@@ -40,11 +41,19 @@ Local development still works without Supabase credentials because `src/utils/st
 | `GET` | `/api/admin/vehicles` | List all vehicles for staff. |
 | `POST` | `/api/admin/vehicles` | Create a vehicle. |
 | `PATCH` | `/api/admin/vehicles/:id` | Update status, featured flag, or vehicle fields. |
+| `POST` | `/api/admin/vehicle-images/upload` | Create a signed upload URL for a public vehicle image. |
 | `GET` | `/api/admin/applications` | List loan applications. |
+| `GET` | `/api/admin/applications/:id` | Read one application with documents and status history. |
 | `PATCH` | `/api/admin/applications/:id` | Update application status and write status history. |
 | `GET` | `/api/admin/leads` | List leads. |
-| `PATCH` | `/api/admin/leads/:id` | Update lead status. |
+| `GET` | `/api/admin/leads/:id` | Read one lead with assignment and notes. |
+| `PATCH` | `/api/admin/leads/:id` | Update lead status, assignment, priority, and notes. |
 | `GET` | `/api/admin/documents/:id/signed-url` | Create a short-lived private document download URL. |
+| `PATCH` | `/api/admin/documents/:id` | Mark a private document reviewed or unreviewed. |
+| `GET` | `/api/admin/staff` | List admin profiles for assignment controls. |
+| `POST` | `/api/admin/staff` | Owner-only staff Auth user and profile creation. |
+| `PATCH` | `/api/admin/staff/:id` | Owner-only role/profile/active-state updates. |
+| `GET` | `/api/admin/analytics` | Return operations metrics, source breakdowns, and recent audit events. |
 
 ## Supabase Setup
 
@@ -58,8 +67,8 @@ Run:
 Then create Auth users for staff and link them:
 
 ```sql
-insert into public.admin_profiles (id, email, role)
-values ('AUTH_USER_UUID', 'admin@example.com', 'admin');
+insert into public.admin_profiles (id, email, role, full_name, is_active)
+values ('AUTH_USER_UUID', 'admin@example.com', 'owner', 'Owner Admin', true);
 ```
 
 ## Environment Variables
@@ -69,6 +78,8 @@ Client-safe:
 ```bash
 VITE_SUPABASE_URL="https://PROJECT_ID.supabase.co"
 VITE_SUPABASE_PUBLISHABLE_KEY="SUPABASE_PUBLIC_OR_ANON_KEY"
+VITE_SUPABASE_DOCUMENTS_BUCKET="kiriro-loan-documents"
+VITE_SUPABASE_VEHICLES_BUCKET="kiriro-vehicle-images"
 VITE_WHATSAPP_NUMBER="254700000000"
 SITE_URL="https://your-domain.com"
 ```

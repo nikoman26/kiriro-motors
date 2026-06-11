@@ -99,7 +99,10 @@ async function main() {
     .upsert({
       id: user.id,
       email,
-      role: 'admin',
+      role: 'owner',
+      full_name: 'Kiriro Owner Admin',
+      is_active: true,
+      updated_at: new Date().toISOString(),
     });
 
   if (profileError) throw profileError;

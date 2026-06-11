@@ -18,40 +18,48 @@ export default function LoanProductPage({ type }: LoanProductPageProps) {
   const [assetYear, setAssetYear] = useState(2020);
   const [ownership, setOwnership] = useState('Owned');
   const [condition, setCondition] = useState('Good');
-  const [files, setFiles] = useState<string[]>([]);
+  const [files, setFiles] = useState<File[]>([]);
   const [trackingNumber, setTrackingNumber] = useState('');
+  const [uploadError, setUploadError] = useState('');
 
   const estimate = useMemo(() => calculateAssetLoan(assetValue, type, requestedAmount, duration), [assetValue, duration, requestedAmount, type]);
   const eligible = isLoanEligible(assetValue, requestedAmount, type) && ownership === 'Owned' && (isLand || assetYear >= 2012);
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setUploadError('');
     const form = new FormData(event.currentTarget);
-    const application = await createApplication({
-      type,
-      name: String(form.get('name') ?? ''),
-      phone: String(form.get('phone') ?? ''),
-      email: String(form.get('email') ?? ''),
-      idNumber: String(form.get('idNumber') ?? ''),
-      requestedAmount,
-      assetValue,
-      durationMonths: duration,
-      purpose: String(form.get('purpose') ?? ''),
-      employment: String(form.get('employment') ?? ''),
-      income: Number(form.get('income') ?? 0),
-      vehicleRegistration: String(form.get('vehicleRegistration') ?? ''),
-      vehicleYear: isLand ? undefined : assetYear,
-      vehicleCondition: condition,
-      propertyCounty: String(form.get('county') ?? ''),
-      propertyLocation: String(form.get('location') ?? ''),
-      propertySize: String(form.get('size') ?? ''),
-      propertyType: String(form.get('propertyType') ?? ''),
-      ownership,
-      documents: files,
-    });
-    setTrackingNumber(application.trackingNumber);
-    event.currentTarget.reset();
-    setFiles([]);
+    try {
+      const application = await createApplication({
+        type,
+        name: String(form.get('name') ?? ''),
+        phone: String(form.get('phone') ?? ''),
+        email: String(form.get('email') ?? ''),
+        idNumber: String(form.get('idNumber') ?? ''),
+        requestedAmount,
+        assetValue,
+        durationMonths: duration,
+        purpose: String(form.get('purpose') ?? ''),
+        employment: String(form.get('employment') ?? ''),
+        income: Number(form.get('income') ?? 0),
+        vehicleRegistration: String(form.get('vehicleRegistration') ?? ''),
+        vehicleYear: isLand ? undefined : assetYear,
+        vehicleCondition: condition,
+        propertyCounty: String(form.get('county') ?? ''),
+        propertyLocation: String(form.get('location') ?? ''),
+        propertySize: String(form.get('size') ?? ''),
+        propertyType: String(form.get('propertyType') ?? ''),
+        ownership,
+        documents: files.map(file => file.name),
+        documentFiles: files,
+        documentTypes: files.map((_, index) => documents[index] ?? 'Supporting document'),
+      });
+      setTrackingNumber(application.trackingNumber);
+      event.currentTarget.reset();
+      setFiles([]);
+    } catch (error) {
+      setUploadError(error instanceof Error ? error.message : 'Application submission failed.');
+    }
   };
 
   const title = isLand ? 'Get Financing Using Your Land Title' : 'Get Cash Using Your Vehicle';
@@ -150,14 +158,20 @@ export default function LoanProductPage({ type }: LoanProductPageProps) {
             <textarea name="purpose" required rows={4} placeholder="Purpose of financing" className="w-full border border-black/15 bg-white/80 px-4 py-3 text-sm outline-none focus:border-black mb-6" />
             <div className="border border-dashed border-black/25 p-5 mb-6">
               <div className="flex items-center gap-2 mb-4"><UploadCloud className="w-5 h-5 text-black/45" /><span className="text-[10px] uppercase tracking-widest font-bold text-black/45">Documents</span></div>
-              <input type="file" multiple onChange={(event) => setFiles(Array.from(event.currentTarget.files ?? []).map((file: File) => file.name))} />
+              <input type="file" multiple accept="application/pdf,image/jpeg,image/png,image/webp" onChange={(event) => setFiles(Array.from(event.currentTarget.files ?? []))} />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4">
                 {documents.map(document => <span key={document} className="bg-white/80 border border-black/5 px-3 py-2 text-[10px] uppercase tracking-widest">{document}</span>)}
               </div>
+              {files.length > 0 && <p className="mt-4 text-sm text-green-700">{files.length} file(s) attached.</p>}
             </div>
+            <label className="flex items-start gap-3 text-sm text-black/60 mb-6">
+              <input required type="checkbox" className="mt-1" />
+              <span>I confirm these documents are mine to submit and may be reviewed by Kiriro Motors staff for this application.</span>
+            </label>
             <button className="w-full bg-black text-white py-5 text-[10px] uppercase tracking-[0.25em] font-bold hover:bg-black/80 transition-colors inline-flex items-center justify-center gap-2">
               Submit {isLand ? 'Land Title' : 'Logbook'} Inquiry <ArrowRight className="w-4 h-4" />
             </button>
+            {uploadError && <p className="mt-5 text-red-700 text-sm">{uploadError}</p>}
             {trackingNumber && <p className="mt-5 text-green-700 font-semibold flex items-center gap-2"><CheckCircle className="w-5 h-5" /> Tracking number: {trackingNumber}</p>}
           </form>
         </main>

@@ -4,6 +4,8 @@ const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string | undefined;
 const supabaseKey = (import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ?? import.meta.env.VITE_SUPABASE_ANON_KEY) as string | undefined;
 
 export const isSupabaseClientConfigured = Boolean(supabaseUrl && supabaseKey);
+export const documentsBucket = (import.meta.env.VITE_SUPABASE_DOCUMENTS_BUCKET as string | undefined) ?? 'kiriro-loan-documents';
+export const vehiclesBucket = (import.meta.env.VITE_SUPABASE_VEHICLES_BUCKET as string | undefined) ?? 'kiriro-vehicle-images';
 
 export const supabase = isSupabaseClientConfigured
   ? createClient(supabaseUrl!, supabaseKey!)

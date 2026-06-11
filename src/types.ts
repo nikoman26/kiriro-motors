@@ -56,6 +56,53 @@ export interface LoanTier {
 export type LoanProduct = 'vehicle-financing' | 'logbook' | 'land-title';
 
 export type ApplicationStatus = 'Submitted' | 'Under Review' | 'Approved' | 'Disbursed' | 'Rejected';
+export type AdminRole = 'owner' | 'admin' | 'staff';
+
+export interface AdminProfile {
+  id: string;
+  email: string;
+  role: AdminRole;
+  fullName?: string;
+  phone?: string;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt?: string;
+}
+
+export interface LoanDocument {
+  id: string;
+  applicationId: string;
+  documentType?: string;
+  fileName: string;
+  mimeType: string;
+  sizeBytes: number;
+  storageKey: string;
+  uploaded: boolean;
+  uploadedAt?: string;
+  reviewedAt?: string;
+  reviewedBy?: string;
+  createdAt: string;
+}
+
+export interface StatusHistoryEntry {
+  id: string;
+  applicationId: string;
+  previousStatus?: ApplicationStatus;
+  nextStatus: ApplicationStatus;
+  adminUserId?: string;
+  note?: string;
+  createdAt: string;
+}
+
+export interface AdminAuditEvent {
+  id: string;
+  adminUserId?: string;
+  action: string;
+  entityType: string;
+  entityId?: string;
+  metadata: Record<string, unknown>;
+  createdAt: string;
+}
 
 export interface LoanApplication {
   id: string;
@@ -81,7 +128,12 @@ export interface LoanApplication {
   propertyType?: string;
   ownership?: string;
   documents: string[];
+  documentRecords?: LoanDocument[];
   notes: string[];
+  assignedTo?: string;
+  assignedAdmin?: AdminProfile;
+  priority?: 'low' | 'normal' | 'high';
+  history?: StatusHistoryEntry[];
   createdAt: string;
   updatedAt: string;
 }
@@ -98,7 +150,12 @@ export interface Lead {
   vehicleId?: string;
   source: string;
   status: LeadStatus;
+  assignedTo?: string;
+  assignedAdmin?: AdminProfile;
+  priority?: 'low' | 'normal' | 'high';
+  notes?: string[];
   createdAt: string;
+  updatedAt?: string;
 }
 
 export interface BlogPost {

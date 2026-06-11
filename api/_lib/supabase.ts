@@ -1,4 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
+import type { AdminRole } from '../../src/types';
+import { adminProfileFromRow } from './mappers';
 
 const supabaseUrl = process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL;
 const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY ?? process.env.SUPABASE_SECRET_KEY;
@@ -53,7 +55,7 @@ export async function requireAdmin(req: any, res: any) {
 
   const { data: profile, error: profileError } = await supabaseAdmin
     .from('admin_profiles')
-    .select('id,email,role')
+    .select('*')
     .eq('id', data.user.id)
     .single();
 
@@ -62,5 +64,21 @@ export async function requireAdmin(req: any, res: any) {
     return null;
   }
 
-  return { user: data.user, profile };
+  const adminProfile = adminProfileFromRow(profile);
+  if (!adminProfile.isActive) {
+    res.status(403).json({ error: 'This admin account is inactive.' });
+    return null;
+  }
+
+  return { user: data.user, profile: adminProfile };
+}
+
+export function roleAllowed(role: AdminRole, allowed: AdminRole[]) {
+  if (role === 'owner') return true;
+  return allowed.includes(role);
+}
+
+export function forbid(res: any, message = 'You do not have permission to perform this action.') {
+  res.status(403).json({ error: message });
+  return null;
 }

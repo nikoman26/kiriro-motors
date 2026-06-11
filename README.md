@@ -35,7 +35,7 @@ The app runs on port `3000` by default.
 - `/testimonials` - success stories
 - `/blog` - resource center
 - `/contact` - contact hub, map, WhatsApp, and lead form
-- `/admin` - local staff CMS for vehicles, applications, leads, and analytics
+- `/admin` - operations CMS for vehicles, applications, documents, leads, staff, analytics, and role-based workflows
 
 ## Quality Checks
 
@@ -71,8 +71,8 @@ Set up Supabase before production deployment:
 
 1. Create a new Supabase project.
 2. Run [supabase/schema.sql](./supabase/schema.sql) in the Supabase SQL editor.
-3. Create staff users in Supabase Auth.
-4. Insert each staff user's UUID into `admin_profiles`.
+3. Seed the owner account with `ADMIN_PASSWORD='...' npm run seed:admin`.
+4. Create additional staff from `/admin` or insert Auth UUIDs into `admin_profiles`.
 5. Add the variables from [.env.example](./.env.example) to Vercel Preview and Production.
 
 Server-only keys such as `SUPABASE_SERVICE_ROLE_KEY` must only be configured in Vercel environment variables, never in client code.

@@ -25,7 +25,8 @@ export default function Apply() {
   const [assetValue, setAssetValue] = useState(3000000);
   const [requestedAmount, setRequestedAmount] = useState(1500000);
   const [duration, setDuration] = useState(12);
-  const [files, setFiles] = useState<string[]>([]);
+  const [files, setFiles] = useState<File[]>([]);
+  const [uploadError, setUploadError] = useState('');
   const [submitted, setSubmitted] = useState<LoanApplication | null>(null);
   const [trackingSearch, setTrackingSearch] = useState('');
   const [trackedApplication, setTrackedApplication] = useState<LoanApplication | null>(null);
@@ -35,35 +36,42 @@ export default function Apply() {
 
   const submitApplication = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setUploadError('');
     const form = new FormData(event.currentTarget);
 
-    const application = await createApplication({
-      type,
-      name: String(form.get('name') ?? ''),
-      phone: String(form.get('phone') ?? ''),
-      email: String(form.get('email') ?? ''),
-      idNumber: String(form.get('idNumber') ?? ''),
-      requestedAmount,
-      assetValue,
-      durationMonths: duration,
-      purpose: String(form.get('purpose') ?? ''),
-      employment: String(form.get('employment') ?? ''),
-      income: Number(form.get('income') ?? 0),
-      vehicleRegistration: String(form.get('vehicleRegistration') ?? ''),
-      vehicleYear: Number(form.get('vehicleYear') ?? 0) || undefined,
-      vehicleCondition: String(form.get('vehicleCondition') ?? ''),
-      propertyCounty: String(form.get('propertyCounty') ?? ''),
-      propertyLocation: String(form.get('propertyLocation') ?? ''),
-      propertySize: String(form.get('propertySize') ?? ''),
-      propertyType: String(form.get('propertyType') ?? ''),
-      ownership: String(form.get('ownership') ?? ''),
-      documents: files,
-    });
+    try {
+      const application = await createApplication({
+        type,
+        name: String(form.get('name') ?? ''),
+        phone: String(form.get('phone') ?? ''),
+        email: String(form.get('email') ?? ''),
+        idNumber: String(form.get('idNumber') ?? ''),
+        requestedAmount,
+        assetValue,
+        durationMonths: duration,
+        purpose: String(form.get('purpose') ?? ''),
+        employment: String(form.get('employment') ?? ''),
+        income: Number(form.get('income') ?? 0),
+        vehicleRegistration: String(form.get('vehicleRegistration') ?? ''),
+        vehicleYear: Number(form.get('vehicleYear') ?? 0) || undefined,
+        vehicleCondition: String(form.get('vehicleCondition') ?? ''),
+        propertyCounty: String(form.get('propertyCounty') ?? ''),
+        propertyLocation: String(form.get('propertyLocation') ?? ''),
+        propertySize: String(form.get('propertySize') ?? ''),
+        propertyType: String(form.get('propertyType') ?? ''),
+        ownership: String(form.get('ownership') ?? ''),
+        documents: files.map(file => file.name),
+        documentFiles: files,
+        documentTypes: files.map((_, index) => documents[index] ?? 'Supporting document'),
+      });
 
-    setSubmitted(application);
-    setTrackingSearch(application.trackingNumber);
-    event.currentTarget.reset();
-    setFiles([]);
+      setSubmitted(application);
+      setTrackingSearch(application.trackingNumber);
+      event.currentTarget.reset();
+      setFiles([]);
+    } catch (error) {
+      setUploadError(error instanceof Error ? error.message : 'Application submission failed.');
+    }
   };
 
   const trackApplication = async (event: FormEvent<HTMLFormElement>) => {
@@ -80,7 +88,7 @@ export default function Apply() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-luxury-gold uppercase tracking-[0.35em] text-[10px] mb-4 font-bold">Loan Application Portal</p>
           <h1 className="font-editorial text-5xl md:text-6xl font-light mb-5">Apply once. Track clearly.</h1>
-          <p className="text-white/50 max-w-2xl leading-relaxed">Choose vehicle financing, logbook financing, or land title financing. Submit details, attach document names, and receive a tracking number for the admin workflow.</p>
+          <p className="text-white/50 max-w-2xl leading-relaxed">Choose vehicle financing, logbook financing, or land title financing. Submit details, attach supporting documents, and receive a tracking number for the admin workflow.</p>
         </div>
       </section>
 
@@ -157,22 +165,27 @@ export default function Apply() {
                 <UploadCloud className="w-6 h-6 text-black/45" />
                 <div>
                   <p className="text-[10px] uppercase tracking-widest font-bold text-black/45">Document Upload</p>
-                  <p className="text-sm text-black/55">Prototype stores selected file names locally.</p>
+                  <p className="text-sm text-black/55">PDF, JPEG, PNG, or WebP. Maximum 10 files, 10 MB each.</p>
                 </div>
               </div>
-              <input type="file" multiple onChange={(event) => setFiles(Array.from(event.currentTarget.files ?? []).map((file: File) => file.name))} className="w-full text-sm" />
+              <input type="file" multiple accept="application/pdf,image/jpeg,image/png,image/webp" onChange={(event) => setFiles(Array.from(event.currentTarget.files ?? []))} className="w-full text-sm" />
               <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-2">
                 {documents.map(document => (
                   <span key={document} className="text-[10px] uppercase tracking-widest bg-white/70 border border-black/5 px-3 py-2">{document}</span>
                 ))}
               </div>
-              {files.length > 0 && <p className="mt-4 text-sm text-green-700">{files.length} file name(s) attached.</p>}
+              {files.length > 0 && <p className="mt-4 text-sm text-green-700">{files.length} file(s) attached.</p>}
             </div>
+            <label className="flex items-start gap-3 text-sm text-black/60 mb-8">
+              <input required type="checkbox" className="mt-1" />
+              <span>I confirm these documents are mine to submit and may be reviewed by Kiriro Motors staff for this application.</span>
+            </label>
 
             <button className="w-full bg-black text-white py-5 text-[10px] uppercase tracking-[0.25em] font-bold hover:bg-black/80 transition-colors inline-flex items-center justify-center gap-2">
               Submit Application <ArrowRight className="w-4 h-4" />
             </button>
 
+            {uploadError && <p className="mt-5 text-red-700 text-sm">{uploadError}</p>}
             {submitted && (
               <div className="mt-6 bg-green-50 border border-green-100 text-green-800 p-5 flex items-start gap-3">
                 <CheckCircle className="w-5 h-5 shrink-0 mt-0.5" />
