@@ -2,14 +2,16 @@
 
 ## Current Backend Architecture
 
-The app now uses Vercel API functions in `api/` with Supabase as the production database, auth, and storage provider.
+The app now uses a Vercel API function in `api/[...path].ts` with Supabase as the production database, auth, and storage provider.
+
+All `/api/*` endpoints are routed through that single catch-all function so the deployment remains compatible with Vercel Hobby plan limits while preserving the public URL contract.
 
 Local development still works without Supabase credentials because `src/utils/storage.ts` falls back to browser demo storage when `/api/*` routes are unavailable or return a Supabase configuration error.
 
 ## Production Stack
 
 - Frontend: Vite React deployed to Vercel.
-- API: Vercel Node serverless functions in `api/`.
+- API: one Vercel Node catch-all serverless function in `api/[...path].ts`.
 - Database: Supabase Postgres.
 - Auth: Supabase Auth plus `admin_profiles`.
 - Storage: Supabase Storage buckets:

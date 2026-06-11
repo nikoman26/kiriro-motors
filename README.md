@@ -65,7 +65,7 @@ This repo is configured for Vercel GitHub import:
 - Build command: `npm run build`
 - Output directory: `dist`
 - SPA rewrites: configured in `vercel.json`
-- Serverless API routes: `api/`
+- Serverless API routes: `api/[...path].ts` dispatches all `/api/*` endpoints through one function so Hobby plan deployments stay under Vercel's Serverless Function limit.
 
 Set up Supabase before production deployment:
 
