@@ -20,7 +20,7 @@ import {
   Users,
   X,
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { AdminAnalytics, editVehicle, getAdminAnalytics, getApplicationDetail, getApplications, getCurrentAdmin, getDocumentDownloadUrl, getLeadDetail, getLeads, getStaff, getVehicles, isAdminLoggedIn, loginAdmin, logoutAdmin, reviewDocument, toggleFeaturedVehicle, updateApplicationWorkflow, updateLeadWorkflow, updateStaff, updateVehicleStatus, uploadVehicleImage, upsertVehicle, createId, createStaff } from '../utils/storage';
 import { AdminProfile, AdminRole, ApplicationStatus, Lead, LoanApplication, LoanDocument, Vehicle, VehicleAvailability } from '../types';
 import { formatKes, formatNumber, readableDate } from '../utils/format';
@@ -29,6 +29,7 @@ import { whatsappUrl } from '../utils/whatsapp';
 type AdminTab = 'vehicles' | 'applications' | 'leads' | 'analytics' | 'staff' | 'settings';
 type Priority = 'low' | 'normal' | 'high';
 
+const adminTabs: AdminTab[] = ['vehicles', 'applications', 'leads', 'analytics', 'staff', 'settings'];
 const statuses: ApplicationStatus[] = ['Submitted', 'Under Review', 'Approved', 'Disbursed', 'Rejected'];
 const availabilityOptions: VehicleAvailability[] = ['Available', 'Reserved', 'Sold', 'Archived'];
 const leadStatuses: Lead['status'][] = ['New', 'Contacted', 'Qualified', 'Closed'];
@@ -37,6 +38,10 @@ const roles: AdminRole[] = ['owner', 'admin', 'staff'];
 
 function slugify(value: string) {
   return value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+}
+
+function readAdminTab(value: string | null): AdminTab | null {
+  return adminTabs.includes(value as AdminTab) ? value as AdminTab : null;
 }
 
 function canManageInventory(profile: AdminProfile | null) {
@@ -104,9 +109,11 @@ function vehicleFromForm(form: FormData, existing?: Vehicle): Vehicle {
 }
 
 export default function Admin() {
+  const [searchParams] = useSearchParams();
+  const requestedTab = searchParams.get('tab');
   const [isLoggedIn, setIsLoggedIn] = useState(() => isAdminLoggedIn());
   const [profile, setProfile] = useState<AdminProfile | null>(null);
-  const [tab, setTab] = useState<AdminTab>('vehicles');
+  const [tab, setTab] = useState<AdminTab>(() => readAdminTab(requestedTab) ?? 'vehicles');
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
   const [applications, setApplications] = useState<LoanApplication[]>([]);
   const [leads, setLeads] = useState<Lead[]>([]);
@@ -131,6 +138,11 @@ export default function Admin() {
   const manageInventory = canManageInventory(profile);
   const manageTeam = canManageStaff(profile);
   const manageAssignments = canAssign(profile);
+
+  useEffect(() => {
+    const nextTab = readAdminTab(requestedTab);
+    if (nextTab) setTab(nextTab);
+  }, [requestedTab]);
 
   const refreshAdminData = async () => {
     const [nextVehicles, nextApplications, nextLeads, nextStaff, nextAnalytics] = await Promise.all([
@@ -366,9 +378,14 @@ export default function Admin() {
             <h1 className="font-editorial text-5xl font-light">Admin Dashboard</h1>
             <p className="text-sm text-white/45 mt-3">{profile?.fullName || profile?.email} - {profile?.role}</p>
           </div>
-          <button onClick={logout} className="border border-white/15 px-5 py-3 text-[10px] uppercase tracking-widest font-bold inline-flex items-center gap-2 hover:bg-white hover:text-black transition-colors">
-            <LogOut className="w-4 h-4" /> Logout
-          </button>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Link to="/pitch" className="border border-luxury-gold/60 px-5 py-3 text-[10px] uppercase tracking-widest font-bold inline-flex items-center justify-center gap-2 text-luxury-gold hover:bg-luxury-gold hover:text-black transition-colors">
+              <Eye className="w-4 h-4" /> Pitch
+            </Link>
+            <button onClick={logout} className="border border-white/15 px-5 py-3 text-[10px] uppercase tracking-widest font-bold inline-flex items-center justify-center gap-2 hover:bg-white hover:text-black transition-colors">
+              <LogOut className="w-4 h-4" /> Logout
+            </button>
+          </div>
         </div>
       </section>
 

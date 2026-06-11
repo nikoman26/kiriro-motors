@@ -9,12 +9,38 @@ Owns the application shell:
 - Renders `Footer` below the active route.
 - Defines the current route table.
 - Uses `ScrollToTop` so route changes start at the top of the page.
+- Renders `PitchReturn` when a demo route is opened with `?from=pitch`.
 
 Future changes:
 
 - Add redirects from `/showroom` to `/cars`.
 - Add missing routes for contact, about, apply, and admin.
 - Consider route-level lazy loading when the app grows.
+
+## `Pitch.tsx`
+
+Owner-facing presentation route at `/pitch`.
+
+Current behavior:
+
+- Explains live platform modules in business-first language.
+- Links to real demo routes with `?from=pitch`.
+- Shows embedded future-feature mockups labeled as Live, Demo Mock, Next, or Future.
+- Summarizes the frontend, Vercel API, Supabase, storage, role, and demo fallback architecture.
+
+Important caveat:
+
+- Mocked future modules are presentation UI only. They do not write data or represent finished integrations.
+
+## `PitchReturn.tsx`
+
+Small global return control for presentation demos.
+
+Current behavior:
+
+- Appears only when the current URL includes `from=pitch`.
+- Links back to `/pitch`.
+- Keeps `/pitch` out of normal customer navigation.
 
 ## `Navigation.tsx`
 

@@ -19,6 +19,8 @@ import Testimonials from './components/Testimonials';
 import Blog from './components/Blog';
 import Contact from './components/Contact';
 import Admin from './components/Admin';
+import Pitch from './components/Pitch';
+import PitchReturn from './components/PitchReturn';
 
 // React Router preserves scroll position during client-side navigation. The
 // public site should feel like separate pages, so each route starts at the top.
@@ -42,6 +44,7 @@ export default function App() {
   return (
     <Router>
       <ScrollToTop />
+      <PitchReturn />
       <div className="flex flex-col min-h-screen">
         <Navigation />
         <main className="flex-1">
@@ -59,6 +62,7 @@ export default function App() {
             <Route path="/testimonials" element={<Testimonials />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/pitch" element={<Pitch />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

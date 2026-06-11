@@ -4,20 +4,21 @@
 
 | Route | Component | Purpose | Data source |
 | --- | --- | --- | --- |
-| `/` | `Home` | Marketplace landing page with slider, services, featured/latest vehicles, EMI calculator, process, testimonials, and CTA. | localStorage vehicles seeded from `INVENTORY` |
-| `/cars` | `Showroom` | Inventory with advanced filters, save, compare, share, grid/list controls, and recommendations. | localStorage vehicles |
-| `/cars/:slug` | `VehicleDetails` | Detail page with gallery, specs, finance, inquiry, WhatsApp, viewing, reservation, and brochure flow. | localStorage vehicles |
+| `/` | `Home` | Marketplace landing page with slider, services, featured/latest vehicles, EMI calculator, process, testimonials, and CTA. | Supabase vehicles with local demo fallback |
+| `/cars` | `Showroom` | Inventory with advanced filters, save, compare, share, grid/list controls, and recommendations. | Supabase vehicles with local demo fallback |
+| `/cars/:slug` | `VehicleDetails` | Detail page with gallery, specs, finance, inquiry, WhatsApp, viewing, reservation, and brochure flow. | Supabase vehicles with local demo fallback |
 | `/showroom` | redirect | Legacy inventory URL redirected to `/cars`. | n/a |
 | `/showroom/:id` | `VehicleDetails` | Legacy detail URL still supported by ID lookup. | localStorage vehicles |
 | `/loans` | `Loans` | Financing hub linking to vehicle finance, logbook, and land title flows. | static loan tiers |
-| `/logbook-loans` | `LogbookLoans` | Logbook loan eligibility, calculator, form, documents, and tracking number generation. | localStorage applications |
-| `/land-title-loans` | `LandTitleLoans` | Land title calculator, property form, documents, and tracking number generation. | localStorage applications |
-| `/apply` | `Apply` | Unified application portal, application dashboard, document-name capture, and trade-in valuation. | localStorage applications/leads |
+| `/logbook-loans` | `LogbookLoans` | Logbook loan eligibility, calculator, form, documents, and tracking number generation. | Supabase applications/documents with local demo fallback |
+| `/land-title-loans` | `LandTitleLoans` | Land title calculator, property form, documents, and tracking number generation. | Supabase applications/documents with local demo fallback |
+| `/apply` | `Apply` | Unified application portal, application dashboard, document upload, and trade-in valuation. | Supabase applications/documents/leads with local demo fallback |
 | `/about` | `About` | Company history, mission, values, licenses, partners, and timeline. | static content |
 | `/testimonials` | `Testimonials` | Success stories and video placeholders. | static testimonials |
 | `/blog` | `Blog` | SEO resource listing with search/category filtering. | static blog posts |
-| `/contact` | `Contact` | Map, branches, WhatsApp CTA, and lead form. | static branches/localStorage leads |
-| `/admin` | `Admin` | Local CMS for vehicle management, loan management, customer leads, and analytics. | localStorage |
+| `/contact` | `Contact` | Map, branches, WhatsApp CTA, and lead form. | static branches/Supabase leads with local demo fallback |
+| `/admin` | `Admin` | Operations CMS for vehicles, applications, documents, leads, staff, analytics, and role-based workflows. | Supabase admin APIs with local demo fallback |
+| `/pitch` | `Pitch` | Hidden owner presentation page with live demo links, business guidance, and labeled future-feature mockups. | static presentation content |
 
 ## Planned Route Map
 
@@ -30,10 +31,11 @@
 | `/apply` | Implemented | Unified finance application workflow. |
 | `/contact` | Implemented | Contact hub, WhatsApp CTA, branch details, and lead form. |
 | `/about` | Implemented | Company story, trust, values, certifications, and partners. |
-| `/admin` | Implemented local prototype | Admin dashboard with local login and localStorage records. |
-| `/admin/vehicles` | MVP | Vehicle CRUD and publishing controls. |
-| `/admin/applications` | MVP | Loan application review and status management. |
-| `/admin/leads` | MVP | Inquiry, contact, and viewing request inbox. |
+| `/admin` | Implemented | Operations dashboard with Supabase-backed staff workflows and local fallback. |
+| `/pitch` | Implemented | Public-but-hidden owner pitch page. Not linked from normal customer navigation. |
+| `/admin?tab=vehicles` | Implemented | Vehicle CRUD and publishing controls. |
+| `/admin?tab=applications` | Implemented | Loan application review and status management. |
+| `/admin?tab=leads` | Implemented | Inquiry, contact, and viewing request inbox. |
 | `/blog` | Phase 2 | SEO resources and buying guides. |
 | `/track/:trackingId` | Phase 3 | Customer-facing application status page. |
 

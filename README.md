@@ -36,6 +36,7 @@ The app runs on port `3000` by default.
 - `/blog` - resource center
 - `/contact` - contact hub, map, WhatsApp, and lead form
 - `/admin` - operations CMS for vehicles, applications, documents, leads, staff, analytics, and role-based workflows
+- `/pitch` - hidden owner presentation page with live feature links, mocked roadmap panels, and codebase guidance
 
 ## Quality Checks
 

@@ -27,6 +27,7 @@ The app currently provides:
 - A unified application portal with status tracking and trade-in valuation.
 - About, testimonials, blog/resources, and contact pages.
 - An operations admin CMS for inventory, loan applications, private documents, leads, staff, analytics, and role-based workflows.
+- A hidden `/pitch` owner presentation page with live demo links and clearly labeled future-feature mockups.
 - Responsive navigation and footer.
 - Logo and favicon wired from `logo/logo.svg` through `public/logo.svg` and `public/favicon.svg`.
 
