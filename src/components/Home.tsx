@@ -65,10 +65,10 @@ export default function Home() {
 
         <div className="relative z-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full py-24">
           <div className="max-w-3xl">
-            <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="text-luxury-gold uppercase tracking-[0.35em] text-[10px] mb-5 font-bold">
+            <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="text-luxury-gold uppercase tracking-[0.22em] sm:tracking-[0.35em] text-[10px] mb-5 font-bold">
               Buy Cars. Get Financing. Unlock Value.
             </motion.p>
-            <motion.h1 initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="font-editorial text-5xl md:text-7xl font-light text-white mb-6 leading-none">
+            <motion.h1 initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="font-editorial text-4xl sm:text-5xl md:text-7xl font-light text-white mb-6 leading-tight md:leading-none">
               Drive Your Dream Car Today
             </motion.h1>
             <motion.p initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-base md:text-lg text-white/65 max-w-2xl mb-10 leading-relaxed">
@@ -103,7 +103,7 @@ export default function Home() {
       </section>
 
       <section className="py-16 bg-[#0E0E0E] border-y border-white/5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
           {[
             { icon: Car, title: 'Vehicle Sales', text: 'Curated premium inventory with transparent specs, financing estimates, and WhatsApp conversion.' },
             { icon: FileText, title: 'Logbook Loans', text: 'Vehicle-backed loan applications with eligibility checks, document capture, and tracking IDs.' },
@@ -130,7 +130,7 @@ export default function Home() {
               View All Inventory <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
             {featuredCars.map(vehicle => (
               <div key={vehicle.id}>
                 <VehicleCard vehicle={vehicle} />
@@ -145,8 +145,8 @@ export default function Home() {
           <EmiCalculator initialPrice={featuredCars[0]?.price ?? 6000000} />
           <div className="space-y-6">
             <div>
-              <p className="text-[10px] uppercase tracking-[0.35em] font-bold text-black/45 mb-4">Why Choose Kiriro</p>
-              <h2 className="font-editorial text-5xl font-light leading-tight mb-6">Built for trust, speed, and serious buyers.</h2>
+              <p className="text-[10px] uppercase tracking-[0.22em] sm:tracking-[0.35em] font-bold text-black/45 mb-4">Why Choose Kiriro</p>
+              <h2 className="font-editorial text-4xl sm:text-5xl font-light leading-tight mb-6">Built for trust, speed, and serious buyers.</h2>
               <p className="text-black/60 leading-relaxed">The platform brings vehicle discovery, financing estimates, lead capture, application tracking, and staff management into one operational experience.</p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -194,14 +194,14 @@ export default function Home() {
             </div>
             <Link to="/testimonials" className="text-[10px] uppercase tracking-widest text-luxury-gold font-bold">Read Success Stories</Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mb-16">
             {latestCars.map(vehicle => (
               <div key={vehicle.id}>
                 <VehicleCard vehicle={vehicle} />
               </div>
             ))}
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             {TESTIMONIALS.map(testimonial => (
               <blockquote key={testimonial.name} className="border border-white/8 bg-white/[0.03] p-6">
                 <p className="text-white/65 text-sm leading-relaxed mb-6">"{testimonial.quote}"</p>
@@ -219,7 +219,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
           <div>
             <p className="text-[10px] uppercase tracking-[0.3em] text-black/45 font-bold mb-3">Need Quick Financing?</p>
-            <h2 className="font-editorial text-5xl font-light">Get reviewed by the finance team.</h2>
+            <h2 className="font-editorial text-4xl sm:text-5xl font-light leading-tight">Get reviewed by the finance team.</h2>
           </div>
           <Link to="/apply" className="bg-black text-white px-9 py-5 text-[10px] uppercase tracking-[0.25em] font-bold hover:bg-black/80 transition-colors inline-flex items-center justify-center gap-2">
             Apply Now <ArrowRight className="w-4 h-4" />

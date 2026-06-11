@@ -18,12 +18,12 @@ export default function EmiCalculator({ initialPrice = 5000000, compact = false 
 
   return (
     <section className={`${compact ? 'p-6' : 'p-8 md:p-10'} bg-white/60 border border-black/5 text-black`}>
-      <div className="flex items-end justify-between gap-6 mb-8">
+      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-8">
         <div>
           <p className="text-[10px] uppercase tracking-[0.3em] font-bold text-black/45 mb-2">EMI Calculator</p>
           <h2 className="font-editorial text-3xl font-light">Vehicle Finance Estimate</h2>
         </div>
-        <div className="text-right">
+        <div className="sm:text-right">
           <p className="text-[10px] uppercase tracking-widest text-black/45">Monthly</p>
           <p className="text-2xl font-semibold">{formatKes(monthly)}</p>
         </div>

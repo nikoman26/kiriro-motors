@@ -163,7 +163,7 @@ export default function Pitch() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-10 min-h-[84vh] flex flex-col justify-between">
           <div className="max-w-4xl">
             <Badge value="Live" />
-            <h1 className="font-editorial text-5xl md:text-7xl font-light leading-none mt-6 mb-6">Kiriro Motors Owner Pitch</h1>
+            <h1 className="font-editorial text-4xl sm:text-5xl md:text-7xl font-light leading-tight md:leading-none mt-6 mb-6">Kiriro Motors Owner Pitch</h1>
             <p className="text-lg md:text-xl text-white/65 max-w-3xl leading-relaxed">
               A guided presentation of what the platform does today, what is mocked for business demos, and what can be expanded next.
             </p>
@@ -202,8 +202,8 @@ export default function Pitch() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-8">
             <div>
-              <p className="text-luxury-gold uppercase tracking-[0.35em] text-[10px] mb-4 font-bold">What Is Working Now</p>
-              <h2 className="font-editorial text-4xl md:text-5xl font-light">Live business modules</h2>
+              <p className="text-luxury-gold uppercase tracking-[0.22em] sm:tracking-[0.35em] text-[10px] mb-4 font-bold">What Is Working Now</p>
+              <h2 className="font-editorial text-3xl sm:text-4xl md:text-5xl font-light leading-tight">Live business modules</h2>
             </div>
             <p className="text-white/50 max-w-xl text-sm leading-relaxed">These modules connect to real routes and show the owner the customer journey, staff workflow, and operational value.</p>
           </div>
@@ -232,8 +232,8 @@ export default function Pitch() {
       <section className="py-16 bg-[#0A0A0A]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
-            <p className="text-luxury-gold uppercase tracking-[0.35em] text-[10px] mb-4 font-bold">Presentation Mockups</p>
-            <h2 className="font-editorial text-4xl md:text-5xl font-light">Future features, shown clearly as demos</h2>
+            <p className="text-luxury-gold uppercase tracking-[0.22em] sm:tracking-[0.35em] text-[10px] mb-4 font-bold">Presentation Mockups</p>
+            <h2 className="font-editorial text-3xl sm:text-4xl md:text-5xl font-light leading-tight">Future features, shown clearly as demos</h2>
           </div>
 
           <div className="grid grid-cols-1 xl:grid-cols-[1.1fr_0.9fr] gap-6">
@@ -292,10 +292,10 @@ export default function Pitch() {
       <section className="py-16 bg-[#0E0E0E] border-y border-white/8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-8">
-            <p className="text-luxury-gold uppercase tracking-[0.35em] text-[10px] mb-4 font-bold">Owner Guide</p>
-            <h2 className="font-editorial text-4xl md:text-5xl font-light">How the system works</h2>
+            <p className="text-luxury-gold uppercase tracking-[0.22em] sm:tracking-[0.35em] text-[10px] mb-4 font-bold">Owner Guide</p>
+            <h2 className="font-editorial text-3xl sm:text-4xl md:text-5xl font-light leading-tight">How the system works</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-px bg-white/8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-px bg-white/8">
             {systemFlow.map(item => {
               const Icon = item.icon;
               return (
@@ -313,8 +313,8 @@ export default function Pitch() {
       <section className="py-16 bg-[#0A0A0A]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-10 items-start">
           <div>
-            <p className="text-luxury-gold uppercase tracking-[0.35em] text-[10px] mb-4 font-bold">Readiness</p>
-            <h2 className="font-editorial text-4xl md:text-5xl font-light mb-5">Launch view for the owner</h2>
+            <p className="text-luxury-gold uppercase tracking-[0.22em] sm:tracking-[0.35em] text-[10px] mb-4 font-bold">Readiness</p>
+            <h2 className="font-editorial text-3xl sm:text-4xl md:text-5xl font-light leading-tight mb-5">Launch view for the owner</h2>
             <p className="text-white/55 leading-relaxed mb-8">The page separates what is live from what is shown for presentation. That keeps the demo polished without overstating production integrations.</p>
             <Link to="/admin?tab=settings&from=pitch" className="bg-white text-black px-5 py-4 text-[10px] uppercase tracking-widest font-bold inline-flex items-center gap-2 hover:bg-luxury-gold transition-colors">
               Review admin settings <ArrowRight className="w-4 h-4" />

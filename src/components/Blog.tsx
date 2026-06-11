@@ -16,8 +16,8 @@ export default function Blog() {
     <div className="bg-luxury-cream min-h-screen text-black">
       <section className="bg-[#0E0E0E] text-white pt-24 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-luxury-gold uppercase tracking-[0.35em] text-[10px] mb-4 font-bold">Blog & Resources</p>
-          <h1 className="font-editorial text-5xl md:text-6xl font-light mb-5">Guides that bring buyers in.</h1>
+          <p className="text-luxury-gold uppercase tracking-[0.22em] sm:tracking-[0.35em] text-[10px] mb-4 font-bold">Blog & Resources</p>
+          <h1 className="font-editorial text-4xl sm:text-5xl md:text-6xl font-light mb-5 leading-tight">Guides that bring buyers in.</h1>
           <p className="text-white/55 max-w-2xl leading-relaxed">SEO-focused education for car buying, vehicle financing, logbook loans, property-backed finance, and automotive decisions.</p>
         </div>
       </section>
@@ -37,7 +37,7 @@ export default function Blog() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {posts.map(post => (
             <article key={post.slug} className="bg-white/70 border border-black/5 p-7 hover:border-black/30 transition-colors">
-              <p className="text-[10px] uppercase tracking-widest text-black/45 font-bold mb-4">{post.category} - {readableDate(post.date)} - {post.readTime}</p>
+              <p className="text-[10px] uppercase tracking-widest text-black/45 font-bold mb-4 leading-relaxed">{post.category} - {readableDate(post.date)} - {post.readTime}</p>
               <h2 className="font-editorial text-3xl font-light mb-4">{post.title}</h2>
               <p className="text-sm text-black/60 leading-relaxed mb-8">{post.excerpt}</p>
               <button className="text-[10px] uppercase tracking-widest font-bold inline-flex items-center gap-2 border-b border-black pb-1">Read Resource <ArrowRight className="w-4 h-4" /></button>

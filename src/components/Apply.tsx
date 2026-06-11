@@ -86,8 +86,8 @@ export default function Apply() {
     <div className="min-h-screen bg-luxury-cream text-black">
       <section className="bg-[#0E0E0E] text-white pt-24 pb-16 border-b border-white/8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-luxury-gold uppercase tracking-[0.35em] text-[10px] mb-4 font-bold">Loan Application Portal</p>
-          <h1 className="font-editorial text-5xl md:text-6xl font-light mb-5">Apply once. Track clearly.</h1>
+          <p className="text-luxury-gold uppercase tracking-[0.22em] sm:tracking-[0.35em] text-[10px] mb-4 font-bold">Loan Application Portal</p>
+          <h1 className="font-editorial text-4xl sm:text-5xl md:text-6xl font-light mb-5 leading-tight">Apply once. Track clearly.</h1>
           <p className="text-white/50 max-w-2xl leading-relaxed">Choose vehicle financing, logbook financing, or land title financing. Submit details, attach supporting documents, and receive a tracking number for the admin workflow.</p>
         </div>
       </section>
@@ -125,7 +125,7 @@ export default function Apply() {
               <input name="income" type="number" placeholder="Monthly income estimate" className="border border-black/15 bg-white/70 px-4 py-3 text-sm outline-none focus:border-black" />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-8">
               <label>
                 <span className="block text-[9px] uppercase tracking-widest font-bold text-black/45 mb-2">Asset Value</span>
                 <input type="number" value={assetValue} onChange={(event) => setAssetValue(Number(event.target.value))} className="w-full border border-black/15 bg-white/70 px-4 py-3 text-sm outline-none focus:border-black" />
@@ -141,7 +141,7 @@ export default function Apply() {
             </div>
 
             {type !== 'land-title' && (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-8">
                 <input name="vehicleRegistration" placeholder="Vehicle registration" className="border border-black/15 bg-white/70 px-4 py-3 text-sm outline-none focus:border-black" />
                 <input name="vehicleYear" type="number" placeholder="Vehicle year" className="border border-black/15 bg-white/70 px-4 py-3 text-sm outline-none focus:border-black" />
                 <input name="vehicleCondition" placeholder="Vehicle condition" className="border border-black/15 bg-white/70 px-4 py-3 text-sm outline-none focus:border-black" />
@@ -149,12 +149,12 @@ export default function Apply() {
             )}
 
             {type === 'land-title' && (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-8">
                 <input name="propertyCounty" placeholder="County" className="border border-black/15 bg-white/70 px-4 py-3 text-sm outline-none focus:border-black" />
                 <input name="propertyLocation" placeholder="Property location" className="border border-black/15 bg-white/70 px-4 py-3 text-sm outline-none focus:border-black" />
                 <input name="propertySize" placeholder="Land size" className="border border-black/15 bg-white/70 px-4 py-3 text-sm outline-none focus:border-black" />
                 <input name="propertyType" placeholder="Property type" className="border border-black/15 bg-white/70 px-4 py-3 text-sm outline-none focus:border-black" />
-                <input name="ownership" placeholder="Ownership status" className="border border-black/15 bg-white/70 px-4 py-3 text-sm outline-none focus:border-black md:col-span-2" />
+                <input name="ownership" placeholder="Ownership status" className="border border-black/15 bg-white/70 px-4 py-3 text-sm outline-none focus:border-black lg:col-span-2" />
               </div>
             )}
 
@@ -199,7 +199,7 @@ export default function Apply() {
         </main>
 
         <aside className="space-y-6">
-          <section className="bg-black text-white p-7 sticky top-24">
+          <section className="bg-black text-white p-7 lg:sticky lg:top-24">
             <p className="text-[10px] uppercase tracking-[0.3em] text-white/45 font-bold mb-3">Estimate</p>
             <h3 className="font-editorial text-3xl font-light mb-6">Qualification Preview</h3>
             <div className="space-y-4 text-sm">
@@ -214,9 +214,9 @@ export default function Apply() {
             <form onSubmit={trackApplication}>
               <p className="text-[10px] uppercase tracking-[0.3em] text-black/45 font-bold mb-3">Application Dashboard</p>
               <h3 className="font-editorial text-3xl font-light mb-5">Track Status</h3>
-              <div className="grid grid-cols-[1fr_auto] gap-2 mb-5">
+              <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-2 mb-5">
                 <input value={trackingSearch} onChange={(event) => setTrackingSearch(event.target.value)} placeholder="KR-LB-2026-123456" className="border border-black/15 bg-white/80 px-4 py-3 text-sm outline-none focus:border-black" />
-                <button aria-label="Track application" className="w-12 bg-black text-white flex items-center justify-center"><Search className="w-4 h-4" /></button>
+                <button aria-label="Track application" className="w-full sm:w-12 min-h-12 bg-black text-white flex items-center justify-center"><Search className="w-4 h-4" /></button>
               </div>
             </form>
 

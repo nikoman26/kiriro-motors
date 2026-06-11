@@ -71,16 +71,16 @@ export default function VehicleCard({ vehicle, isSaved = false, isCompared = fal
         <div className="flex items-start justify-between gap-4 mb-4">
           <div>
             <p className="text-[10px] uppercase tracking-[0.25em] text-white/40 mb-2">{vehicle.year} - {vehicle.bodyType}</p>
-            <h3 className="font-editorial text-2xl font-light text-white">{vehicle.make}</h3>
-            <p className="text-sm text-white/55">{vehicle.model} {vehicle.trim}</p>
+            <h3 className="font-editorial text-2xl font-light text-white break-words">{vehicle.make}</h3>
+            <p className="text-sm text-white/55 break-words">{vehicle.model} {vehicle.trim}</p>
           </div>
           <span className="text-luxury-gold font-semibold whitespace-nowrap">{formatShortKes(vehicle.price)}</span>
         </div>
 
-        <div className="grid grid-cols-3 gap-3 text-[10px] uppercase tracking-widest text-white/45 border-y border-white/8 py-4 mb-5">
-          <span>{formatNumber(vehicle.mileage)} km</span>
-          <span>{vehicle.fuel}</span>
-          <span>{vehicle.transmission}</span>
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-[10px] uppercase tracking-widest text-white/45 border-y border-white/8 py-4 mb-5">
+          <span className="break-words leading-relaxed">{formatNumber(vehicle.mileage)} km</span>
+          <span className="break-words leading-relaxed">{vehicle.fuel}</span>
+          <span className="break-words leading-relaxed">{vehicle.transmission}</span>
         </div>
 
         <div className="mt-auto">
@@ -88,12 +88,12 @@ export default function VehicleCard({ vehicle, isSaved = false, isCompared = fal
             <span className="text-white/45">Est. monthly from</span>
             <span className="text-white font-semibold">{formatKes(monthly)}</span>
           </div>
-          <div className="grid grid-cols-[1fr_auto_auto] gap-2">
+          <div className="grid grid-cols-[1fr_44px_44px] gap-2">
             <Link
               to={detailPath}
-              className="bg-white text-black text-center py-3 text-[10px] uppercase font-bold tracking-widest hover:bg-luxury-gold hover:text-black transition-colors inline-flex items-center justify-center gap-2"
+              className="bg-white text-black text-center px-2 py-3 text-[10px] uppercase font-bold tracking-widest hover:bg-luxury-gold hover:text-black transition-colors inline-flex items-center justify-center gap-2 min-w-0"
             >
-              View Details <ChevronRight className="w-4 h-4" />
+              Details <ChevronRight className="w-4 h-4 shrink-0" />
             </Link>
             <a
               aria-label="Ask about this vehicle on WhatsApp"

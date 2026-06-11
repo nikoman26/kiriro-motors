@@ -6,8 +6,8 @@ export default function Testimonials() {
     <div className="bg-[#0A0A0A] text-white min-h-screen">
       <section className="pt-24 pb-16 bg-[#0E0E0E] border-b border-white/8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-luxury-gold uppercase tracking-[0.35em] text-[10px] mb-4 font-bold">Success Stories</p>
-          <h1 className="font-editorial text-5xl md:text-6xl font-light mb-5">Real outcomes, clearly tracked.</h1>
+          <p className="text-luxury-gold uppercase tracking-[0.22em] sm:tracking-[0.35em] text-[10px] mb-4 font-bold">Success Stories</p>
+          <h1 className="font-editorial text-4xl sm:text-5xl md:text-6xl font-light mb-5 leading-tight">Real outcomes, clearly tracked.</h1>
           <p className="text-white/50 max-w-2xl leading-relaxed">Customer stories for vehicle purchases, logbook financing, and land title financing. Video placeholders are ready for production testimonials.</p>
         </div>
       </section>

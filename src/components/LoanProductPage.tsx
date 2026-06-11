@@ -74,8 +74,8 @@ export default function LoanProductPage({ type }: LoanProductPageProps) {
       <section className="bg-[#0E0E0E] text-white pt-24 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-10 items-end">
           <div>
-            <p className="text-luxury-gold uppercase tracking-[0.35em] text-[10px] mb-4 font-bold">{isLand ? 'Land Title Loans' : 'Logbook Loans'}</p>
-            <h1 className="font-editorial text-5xl md:text-6xl font-light mb-5">{title}</h1>
+            <p className="text-luxury-gold uppercase tracking-[0.22em] sm:tracking-[0.35em] text-[10px] mb-4 font-bold">{isLand ? 'Land Title Loans' : 'Logbook Loans'}</p>
+            <h1 className="font-editorial text-4xl sm:text-5xl md:text-6xl font-light mb-5 leading-tight">{title}</h1>
             <p className="text-white/55 max-w-2xl leading-relaxed">{subtitle}</p>
           </div>
           <div className="border border-white/10 bg-white/[0.03] p-7">
@@ -177,7 +177,7 @@ export default function LoanProductPage({ type }: LoanProductPageProps) {
         </main>
 
         <aside className="space-y-6">
-          <section className="bg-black text-white p-7 sticky top-24">
+          <section className="bg-black text-white p-7 lg:sticky lg:top-24">
             <p className="text-[10px] uppercase tracking-[0.3em] text-white/45 font-bold mb-3">Loan Calculator</p>
             <h3 className="font-editorial text-3xl font-light mb-6">Estimated Repayment</h3>
             <div className="space-y-4 text-sm">

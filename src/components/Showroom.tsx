@@ -171,16 +171,16 @@ export default function Showroom() {
     <div className="bg-[#0A0A0A] text-white min-h-screen">
       <div className="bg-[#0E0E0E] border-b border-white/10 pt-24 pb-14">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-luxury-gold uppercase tracking-[0.35em] text-[10px] mb-4 font-bold">Vehicle Inventory</p>
+          <p className="text-luxury-gold uppercase tracking-[0.22em] sm:tracking-[0.35em] text-[10px] mb-4 font-bold">Vehicle Inventory</p>
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
             <div>
-              <h1 className="font-editorial text-5xl font-light mb-4">Cars For Sale</h1>
+              <h1 className="font-editorial text-4xl sm:text-5xl font-light mb-4 leading-tight">Cars For Sale</h1>
               <p className="text-white/45 max-w-2xl text-sm leading-relaxed">Advanced search, finance estimates, save lists, comparison, and WhatsApp-ready inquiry paths for serious buyers.</p>
             </div>
             <div className="flex gap-2">
               <button onClick={() => setViewMode('grid')} className={`w-11 h-11 border flex items-center justify-center ${viewMode === 'grid' ? 'bg-white text-black' : 'border-white/15 text-white'}`} aria-label="Grid view"><Grid2X2 className="w-4 h-4" /></button>
               <button onClick={() => setViewMode('list')} className={`w-11 h-11 border flex items-center justify-center ${viewMode === 'list' ? 'bg-white text-black' : 'border-white/15 text-white'}`} aria-label="List view"><List className="w-4 h-4" /></button>
-              <button onClick={() => setIsFilterOpen(true)} className="md:hidden w-11 h-11 border border-white/15 flex items-center justify-center" aria-label="Open filters"><Filter className="w-4 h-4" /></button>
+              <button onClick={() => setIsFilterOpen(true)} className="lg:hidden w-11 h-11 border border-white/15 flex items-center justify-center" aria-label="Open filters"><Filter className="w-4 h-4" /></button>
             </div>
           </div>
         </div>

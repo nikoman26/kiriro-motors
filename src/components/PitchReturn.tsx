@@ -11,7 +11,7 @@ export default function PitchReturn() {
   return (
     <Link
       to="/pitch"
-      className="fixed bottom-4 left-4 right-4 sm:right-auto z-[60] bg-white text-black border border-black/10 px-4 py-3 text-[10px] uppercase tracking-widest font-bold inline-flex items-center justify-center gap-2 shadow-2xl hover:bg-luxury-gold transition-colors"
+      className="fixed bottom-4 left-1/2 z-[60] w-[calc(100%-2rem)] max-w-xs -translate-x-1/2 bg-white text-black border border-black/10 px-4 py-3 text-[10px] uppercase tracking-widest font-bold inline-flex items-center justify-center gap-2 shadow-2xl hover:bg-luxury-gold transition-colors sm:left-4 sm:w-auto sm:translate-x-0"
     >
       <ArrowLeft className="w-4 h-4" />
       <Presentation className="w-4 h-4" />

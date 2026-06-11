@@ -355,8 +355,8 @@ export default function Admin() {
     return (
       <div className="min-h-screen bg-[#0A0A0A] text-white flex items-center justify-center p-4">
         <form onSubmit={login} className="w-full max-w-md bg-[#0E0E0E] border border-white/8 p-8">
-          <p className="text-luxury-gold uppercase tracking-[0.35em] text-[10px] mb-4 font-bold">Admin CMS</p>
-          <h1 className="font-editorial text-4xl font-light mb-5">Staff Login</h1>
+          <p className="text-luxury-gold uppercase tracking-[0.22em] sm:tracking-[0.35em] text-[10px] mb-4 font-bold">Admin CMS</p>
+          <h1 className="font-editorial text-4xl font-light mb-5 leading-tight">Staff Login</h1>
           <p className="text-white/45 text-sm mb-6">Use a Supabase staff account. Demo mode opens only when the backend API is unavailable.</p>
           <div className="space-y-3">
             <input name="email" type="email" required placeholder="Email" className="w-full bg-white/5 border border-white/10 px-4 py-3 text-sm outline-none focus:border-luxury-gold" />
@@ -374,8 +374,8 @@ export default function Admin() {
       <section className="pt-24 pb-8 bg-[#0E0E0E] border-b border-white/8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
           <div>
-            <p className="text-luxury-gold uppercase tracking-[0.35em] text-[10px] mb-4 font-bold">Internal Operations</p>
-            <h1 className="font-editorial text-5xl font-light">Admin Dashboard</h1>
+            <p className="text-luxury-gold uppercase tracking-[0.22em] sm:tracking-[0.35em] text-[10px] mb-4 font-bold">Internal Operations</p>
+            <h1 className="font-editorial text-4xl sm:text-5xl font-light leading-tight">Admin Dashboard</h1>
             <p className="text-sm text-white/45 mt-3">{profile?.fullName || profile?.email} - {profile?.role}</p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3">
@@ -457,12 +457,12 @@ export default function Admin() {
               <div className="space-y-4 mt-4">
                 {visibleVehicles.length === 0 && <EmptyState text="No vehicles match the current filters." />}
                 {visibleVehicles.map(vehicle => (
-                  <article key={vehicle.id} className="bg-[#0E0E0E] border border-white/8 p-5 grid grid-cols-[110px_1fr] gap-5">
-                    <img src={vehicle.image} alt={vehicle.make} className="w-full aspect-square object-cover bg-white/5" />
+                  <article key={vehicle.id} className="bg-[#0E0E0E] border border-white/8 p-5 grid grid-cols-1 sm:grid-cols-[110px_1fr] gap-5">
+                    <img src={vehicle.image} alt={vehicle.make} className="w-full sm:w-[110px] aspect-[4/3] sm:aspect-square object-cover bg-white/5" />
                     <div>
                       <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                         <div>
-                          <h3 className="font-editorial text-2xl font-light">{vehicle.year} {vehicle.make} {vehicle.model}</h3>
+                          <h3 className="font-editorial text-2xl font-light break-words">{vehicle.year} {vehicle.make} {vehicle.model}</h3>
                           <p className="text-sm text-white/45">{formatKes(vehicle.price)} - {formatNumber(vehicle.mileage)} km - {vehicle.location}</p>
                           <p className="mt-2 text-[10px] uppercase tracking-widest text-white/35">{vehicle.availability} - {vehicle.featured ? 'Featured' : 'Standard'} - {vehicle.gallery.length} images</p>
                         </div>
@@ -561,7 +561,7 @@ export default function Admin() {
 
 function Toolbar({ search, setSearch, status, setStatus, options, onRefresh }: { search: string; setSearch: (value: string) => void; status: string; setStatus: (value: string) => void; options: string[]; onRefresh: () => void }) {
   return (
-    <div className="bg-[#0E0E0E] border border-white/8 p-4 grid grid-cols-1 md:grid-cols-[1fr_180px_auto] gap-3">
+    <div className="bg-[#0E0E0E] border border-white/8 p-4 grid grid-cols-1 lg:grid-cols-[1fr_180px_auto] gap-3">
       <label className="relative">
         <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-white/35" />
         <input value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search" className="w-full bg-white/5 border border-white/10 pl-10 pr-3 py-3 text-sm outline-none focus:border-luxury-gold" />
@@ -586,8 +586,8 @@ function ApplicationPanel({ application, staff, canAssign, onSubmit, onDownload,
   return (
     <aside className="bg-[#0E0E0E] border border-white/8 p-6 h-fit xl:sticky xl:top-24">
       <p className="text-[10px] uppercase tracking-widest text-luxury-gold mb-2">{application.trackingNumber}</p>
-      <h2 className="font-editorial text-3xl font-light mb-2">{application.name}</h2>
-      <p className="text-sm text-white/45 mb-5">{application.phone} - {application.email}</p>
+      <h2 className="font-editorial text-3xl font-light mb-2 break-words">{application.name}</h2>
+      <p className="text-sm text-white/45 mb-5 break-words">{application.phone} - {application.email}</p>
       <div className="grid grid-cols-2 gap-3 text-sm mb-6">
         <Info label="Requested" value={formatKes(application.requestedAmount)} />
         <Info label="Asset Value" value={formatKes(application.assetValue)} />
@@ -618,7 +618,7 @@ function ApplicationPanel({ application, staff, canAssign, onSubmit, onDownload,
           <div key={document.id} className="border border-white/8 p-3">
             <p className="text-sm">{document.fileName}</p>
             <p className="text-xs text-white/40 mb-3">{document.documentType ?? 'Document'} - {document.uploaded ? 'Uploaded' : 'Pending upload'} - {document.reviewedAt ? 'Reviewed' : 'Unreviewed'}</p>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               <button type="button" onClick={() => onDownload(document)} className="border border-white/15 px-3 py-2 text-[10px] uppercase tracking-widest inline-flex items-center gap-2"><Download className="w-4 h-4" /> Open</button>
               <button type="button" onClick={() => onReview(document, !document.reviewedAt)} className="border border-white/15 px-3 py-2 text-[10px] uppercase tracking-widest inline-flex items-center gap-2"><FileCheck className="w-4 h-4" /> {document.reviewedAt ? 'Unreview' : 'Review'}</button>
             </div>
@@ -643,9 +643,9 @@ function LeadPanel({ lead, staff, canAssign, onSubmit }: { lead: Lead | null; st
   return (
     <aside className="bg-[#0E0E0E] border border-white/8 p-6 h-fit xl:sticky xl:top-24">
       <p className="text-[10px] uppercase tracking-widest text-luxury-gold mb-2">{lead.type} - {readableDate(lead.createdAt)}</p>
-      <h2 className="font-editorial text-3xl font-light mb-2">{lead.name}</h2>
-      <p className="text-sm text-white/45 mb-5">{lead.phone} {lead.email ? `- ${lead.email}` : ''}</p>
-      <p className="text-sm text-white/60 mb-5">{lead.message}</p>
+      <h2 className="font-editorial text-3xl font-light mb-2 break-words">{lead.name}</h2>
+      <p className="text-sm text-white/45 mb-5 break-words">{lead.phone} {lead.email ? `- ${lead.email}` : ''}</p>
+      <p className="text-sm text-white/60 mb-5 break-words">{lead.message}</p>
       <a href={whatsappUrl(message, lead.phone)} target="_blank" rel="noreferrer" className="mb-6 w-full bg-green-500 text-black py-3 text-[10px] uppercase tracking-widest font-bold inline-flex items-center justify-center gap-2">
         <MessageCircle className="w-4 h-4" /> WhatsApp Handoff
       </a>
@@ -676,7 +676,7 @@ function AnalyticsPanel({ analytics }: { analytics: AdminAnalytics | null }) {
   const metrics = analytics?.metrics;
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
         {[
           ['Active Vehicles', metrics?.activeVehicles ?? 0],
           ['Sold Vehicles', metrics?.soldVehicles ?? 0],
@@ -735,8 +735,8 @@ function StaffPanel({ profile, staff, canManage, onSubmit, onPatch }: { profile:
           <article key={member.id} className="bg-[#0E0E0E] border border-white/8 p-5">
             <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
               <div>
-                <h3 className="font-editorial text-2xl font-light">{member.fullName || member.email}</h3>
-                <p className="text-sm text-white/45">{member.email} {member.phone ? `- ${member.phone}` : ''}</p>
+                <h3 className="font-editorial text-2xl font-light break-words">{member.fullName || member.email}</h3>
+                <p className="text-sm text-white/45 break-words">{member.email} {member.phone ? `- ${member.phone}` : ''}</p>
                 <p className="mt-2 text-[10px] uppercase tracking-widest text-white/35">{member.role} - {member.isActive ? 'Active' : 'Inactive'}</p>
               </div>
               <div className="flex flex-wrap gap-2">
@@ -761,7 +761,7 @@ function SettingsPanel({ profile, notice, functionCount }: { profile: AdminProfi
       <InfoCard icon={FileCheck} title="Documents" value="Signed URLs" detail="Customer uploads and admin downloads use short-lived Supabase signed URLs." />
       <div className="lg:col-span-3 bg-[#0E0E0E] border border-white/8 p-6">
         <h2 className="font-editorial text-3xl font-light mb-5">Role Matrix</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 text-sm">
           <p className="text-white/60"><strong className="text-white">Owner:</strong> staff, settings, inventory, leads, applications, documents.</p>
           <p className="text-white/60"><strong className="text-white">Admin:</strong> inventory, leads, applications, assignments, documents.</p>
           <p className="text-white/60"><strong className="text-white">Staff:</strong> assigned leads/applications, notes, statuses, WhatsApp handoff.</p>

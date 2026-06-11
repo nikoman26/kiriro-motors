@@ -46,7 +46,7 @@ export default function AiLoanAssistant() {
           <Bot className="w-5 h-5" />
         </div>
         <div>
-          <p className="text-[10px] uppercase tracking-[0.3em] text-white/40 font-bold">AI Loan Assistant</p>
+          <p className="text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.3em] text-white/40 font-bold">AI Loan Assistant</p>
           <h3 className="font-editorial text-2xl font-light">Quick Finance Help</h3>
         </div>
       </div>
@@ -59,9 +59,9 @@ export default function AiLoanAssistant() {
         ))}
       </div>
 
-      <form onSubmit={submitQuestion} className="grid grid-cols-[1fr_auto] gap-2">
+      <form onSubmit={submitQuestion} className="grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-2">
         <input name="question" placeholder="Ask about requirements..." className="bg-white/5 border border-white/10 px-4 py-3 text-sm outline-none focus:border-luxury-gold" />
-        <button aria-label="Send question" className="w-12 bg-white text-black flex items-center justify-center hover:bg-luxury-gold transition-colors">
+        <button aria-label="Send question" className="w-full sm:w-12 min-h-12 bg-white text-black flex items-center justify-center hover:bg-luxury-gold transition-colors">
           <Send className="w-4 h-4" />
         </button>
       </form>

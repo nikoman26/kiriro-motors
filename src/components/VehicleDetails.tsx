@@ -39,7 +39,7 @@ export default function VehicleDetails() {
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#0A0A0A] text-white">
-        <p className="text-[10px] uppercase tracking-[0.35em] text-white/45 font-bold">Loading vehicle</p>
+        <p className="text-[10px] uppercase tracking-[0.22em] sm:tracking-[0.35em] text-white/45 font-bold">Loading vehicle</p>
       </div>
     );
   }
@@ -166,8 +166,8 @@ export default function VehicleDetails() {
 
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-8 items-end">
             <div>
-              <p className="text-[10px] font-bold tracking-[0.35em] text-luxury-gold uppercase mb-3">{car.year} - {car.bodyType} - {car.location}</p>
-              <h1 className="font-editorial text-5xl md:text-7xl font-light leading-none mb-4">{car.make}</h1>
+              <p className="text-[10px] font-bold tracking-[0.22em] sm:tracking-[0.35em] text-luxury-gold uppercase mb-3">{car.year} - {car.bodyType} - {car.location}</p>
+              <h1 className="font-editorial text-4xl sm:text-5xl md:text-7xl font-light leading-tight md:leading-none mb-4 break-words">{car.make}</h1>
               <p className="text-2xl text-white/65 mb-6">{car.model} {car.trim}</p>
               <div className="flex flex-wrap gap-3">
                 {car.gallery.map(image => (
@@ -245,7 +245,7 @@ export default function VehicleDetails() {
         </main>
 
         <aside className="lg:col-span-4 space-y-6">
-          <form onSubmit={(event) => submitViewing(event, 'viewing')} className="bg-luxury-cream text-black border border-black/5 p-7 sticky top-24">
+          <form onSubmit={(event) => submitViewing(event, 'viewing')} className="bg-luxury-cream text-black border border-black/5 p-7 lg:sticky lg:top-24">
             <CalendarCheck className="w-7 h-7 text-black/55 mb-5" />
             <h3 className="font-editorial text-3xl font-light mb-2">Schedule Viewing</h3>
             <p className="text-sm text-black/55 mb-6">Pick a date and time for showroom viewing or an assisted video call.</p>
@@ -281,7 +281,7 @@ export default function VehicleDetails() {
                 <div className="w-20 h-20 rounded-full border border-white/25 bg-black/30 backdrop-blur-md flex items-center justify-center mb-4">
                   <PlayCircle className="w-9 h-9 text-white" />
                 </div>
-                <span className="text-[10px] uppercase tracking-[0.35em] text-white/70 font-bold">Simulated 360 viewer</span>
+                <span className="text-[10px] uppercase tracking-[0.22em] sm:tracking-[0.35em] text-white/70 font-bold text-center">Simulated 360 viewer</span>
               </div>
             )}
             {showFullscreen && (

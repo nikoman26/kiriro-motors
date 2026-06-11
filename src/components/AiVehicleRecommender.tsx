@@ -42,7 +42,7 @@ export default function AiVehicleRecommender({ vehicles }: AiVehicleRecommenderP
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
         <label className="block">
           <span className="block text-[9px] uppercase tracking-widest text-white/45 font-bold mb-2">Budget: {formatKes(budget)}</span>
           <input type="range" min={5000000} max={26000000} step={500000} value={budget} onChange={(event) => setBudget(Number(event.target.value))} className="w-full accent-luxury-gold" />
@@ -70,7 +70,7 @@ export default function AiVehicleRecommender({ vehicles }: AiVehicleRecommenderP
         </label>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
         {recommendations.map(({ vehicle, score }) => (
           <div key={vehicle.id} className="border border-white/8 bg-white/5 p-4">
             <p className="text-[10px] uppercase tracking-widest text-luxury-gold mb-2">Match score {score}%</p>
